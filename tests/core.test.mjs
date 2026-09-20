@@ -1,0 +1,8 @@
+import assert from 'node:assert/strict';
+import {dateKey,effectiveDate,addDays,timePosition,freshData,ensureDay,aggregate,habitDue,habitCount,validateBackup,eventStamp} from '../dist/core.js';
+assert.equal(effectiveDate(new Date(2026,8,20,3,59)),'2026-09-19');assert.equal(effectiveDate(new Date(2026,8,20,4,0)),'2026-09-20');assert.equal(addDays('2026-03-29',1),'2026-03-30');assert.equal(addDays('2026-12-31',1),'2027-01-01');assert.equal(timePosition('03:00'),23);assert.equal(timePosition('04:00'),0);
+const data=freshData();const day=ensureDay(data,'2026-09-20');day.events=[{id:'a',type:'mood',time:'12:00',mood:4,energy:8},{id:'b',type:'mood',time:'18:00',mood:8,productivity:5}];day.journal={rating:10,dayEnergy:'niska'};
+const a=aggregate(data,'2026-09-20',7);assert.equal(a[6].mood,6);assert.equal(a[6].energy,8);assert.equal(a[6].productivity,5);assert.equal(a[0].mood,null);assert.equal(a[6].dayRating,10);
+const h={id:'h',name:'Bieganie',mode:'days',target:1,weekdays:[2,4,6],slots:[],startDate:'2026-09-01'};data.habits.push(h);assert.equal(habitDue(h,'2026-09-22'),true);assert.equal(habitDue(h,'2026-09-23'),false);h.mode='weekly';h.target=3;day.checks.h=[true];ensureDay(data,'2026-09-19').checks.h=[true];assert.equal(habitCount(data,h,'2026-09-20'),2);assert.equal(habitCount(data,h,'2026-09-21'),0);
+assert.deepEqual(validateBackup(JSON.parse(JSON.stringify(data))),data);assert.throws(()=>validateBackup({...data,version:2}));const bad=structuredClone(data);bad.days['2026-09-20'].journal.photo='javascript:alert(1)';assert.throws(()=>validateBackup(bad));
+console.log('PASS: 04:00 boundary, calendar arithmetic, sparse averages, daily vs momentary scores, schedules, backup validation.');
