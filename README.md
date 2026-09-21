@@ -1,5 +1,24 @@
 # Blisko — mój dziennik
 
+Wersja 1.1 — [otwórz aplikację](https://ostrowele.github.io/blisko/).
+
+## Nowości w 1.1
+
+- Szybkie przyciski wyboru napojów, leków, objawów i zdarzeń, wyszukiwarka oraz zapis wielu pozycji naraz. Każdy lek ma własną dawkę, objaw własne nasilenie, napój własną ilość. Dodanie nowej pozycji zachowuje rozpoczęty wybór.
+- Historia → Wspomnienia: album ze zdjęciami i fragmentami wpisów, kalendarz zdjęć, podgląd pełnego zdjęcia, przechodzenie między wspomnieniami i powrót do całej kartki.
+- Analiza: porównania wybranego zdarzenia z nastrojem, energią, produktywnością, wieczornymi ocenami lub objawem w tym samym albo następnym dniu. Korelacje rangowe oraz najbliższe pomiary przed i po zdarzeniu. Zakresy 7/30/90 dni.
+- Opcjonalne potwierdzenie kompletności wpisów w kategorii: brak rekordu staje się potwierdzonym brakiem tylko wtedy, gdy użytkownik wyraźnie oznaczył kategorię jako kompletną dla tego dnia.
+
+Aktualizacja zachowuje istniejącą bazę i format kopii. Otwórz aplikację z internetem, zamknij wszystkie okna Blisko (również kartę Chrome z aplikacją) i uruchom ponownie. Nie usuwaj danych witryny. W nowych wersjach komunikat o aktualizacji pozwala zapisać i odświeżyć aplikację.
+
+## Jak interpretować analizę
+
+Każdy dzień ma tę samą wagę. Brakujące pomiary są pomijane; oceny wieczorne nie są dodawane do średnich z pomiarów chwilowych. Porównanie grup wymaga co najmniej 5 dni w każdej grupie, korelacja rangowa co najmniej 10 wspólnych dni, a zestawienie przed/po co najmniej 5 dni z kompletną parą pomiarów. Te progi ograniczają pokazywanie wyników z pojedynczych wpisów, ale nie gwarantują wiarygodności.
+
+Korelacja Spearmana jest liczona na rangach z uśrednieniem remisów; nie jest podawana dla stałej serii. Nie wyliczamy istotności statystycznej. Analiza nie uwzględnia automatycznie innych leków, pory dnia, zmian leczenia ani innych czynników zakłócających. Wyniki opisują współwystępowanie, nie działanie leku ani przyczynę objawu. Podstawa metody: [korelacja rangowa — SciPy](https://docs.scipy.org/doc/scipy/tutorial/stats/hypothesis_spearmanr.html), [zależność a przyczynowość — NIST](https://itl.nist.gov/div898/handbook/eda/section3/eda33q.htm).
+
+Przed/po: pierwszy zapis wybranego zdarzenia w danym dniu, najbliższy pomiar do 3 godzin wcześniej i do 3 godzin później, maksymalnie jedna para na dzień. Para jest pomijana, jeśli w jej przedziale wystąpił kolejny zapis tego samego zdarzenia. Pomiary mogą przekraczać granicę dziennika o 04:00. Inne równoczesne zdarzenia nadal mogą wpływać na wynik.
+
 Prywatna aplikacja PWA po polsku. Działa lokalnie na telefonie, także offline po pierwszym otwarciu. Nie wymaga konta ani serwera z bazą danych. Nie wysyła wpisów i zdjęć do GitHuba ani do usług analitycznych.
 
 ## Co zawiera

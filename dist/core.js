@@ -28,6 +28,7 @@ export function validateBackup(input){
  for(const h of input.habits)if(!['daily','days','weekly'].includes(h.mode)||!Number.isInteger(h.target)||!number(h.target,1,20)||!Array.isArray(h.weekdays)||h.weekdays.some(n=>!Number.isInteger(n)||!number(n,0,6))||!validDate(h.startDate)||(h.endDate&&!validDate(h.endDate))||!Array.isArray(h.slots)||h.slots.length>20||h.slots.some(s=>!string(s,100)))throw Error('Nieprawidłowy harmonogram nawyku.');
  for(const [key,d] of Object.entries(input.days)){
   if(!validDate(key)||!d||!Array.isArray(d.events)||!d.journal||typeof d.journal!=='object'||Array.isArray(d.journal)||!d.checks||typeof d.checks!=='object'||Array.isArray(d.checks))throw Error('Nieprawidłowy zapis dnia.');
+  if(d.reviewed!=null&&(!d.reviewed||typeof d.reviewed!=='object'||Array.isArray(d.reviewed)||Object.entries(d.reviewed).some(([k,v])=>!['med','symptom','drink','activity'].includes(k)||typeof v!=='boolean')))throw Error('Nieprawidłowe potwierdzenia kompletności.');
   const ids=new Set();for(const e of d.events){
    if(!e||!safeId(e.id)||ids.has(e.id)||!['mood','drink','symptom','med','activity','sleep','bowel','note'].includes(e.type)||!/^([01]\d|2[0-3]):[0-5]\d$/.test(e.time))throw Error('Nieprawidłowy wpis.');ids.add(e.id);
    for(const k of ['mood','energy','productivity'])if(e[k]!=null&&!number(e[k],1,10))throw Error('Nieprawidłowa skala.');

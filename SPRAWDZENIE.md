@@ -1,5 +1,11 @@
 # Sprawdzenie pierwszej wersji
 
+## Aktualizacja 1.1 — 21 września 2026
+
+W osobnym profilu Chrome z syntetycznymi danymi sprawdzono: wielokrotny wybór leków/objawów/napojów, dawki i nasilenia każdej pozycji, zachowanie wyboru podczas wyszukiwania i dodawania nowej pozycji, anulowanie, edycję pojedynczego wpisu, zachowanie starszych danych, album i kalendarz zdjęć, przechodzenie do kartki, analizę grup i progi liczebności. Sprawdzono układ w szerokościach 320/390/740/900/1200 px, motyw ciemny oraz ładowanie nowych modułów i zapis bez internetu.
+
+Testy analizy obejmują remisy rang, stałe serie, brakujące pomiary, potwierdzony brak zdarzenia, porównanie następnego dnia, objawy, pary przed/po i przekroczenie godziny 04:00. Poprzedni format kopii pozostaje obsługiwany. Testy są w `tests/analysis.test.mjs`.
+
 Sprawdzono 20 września 2026 w oddzielnym, tymczasowym profilu Chrome.
 
 - Dodawanie nastroju, energii, produktywności i napojów.
