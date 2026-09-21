@@ -1,5 +1,5 @@
-const CACHE='blisko-shell-v3';
-const ASSETS=['./','./index.html','./style.css','./app.js','./core.js','./db.js','./enhancements.js','./analysis.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
+const CACHE='blisko-shell-v4';
+const ASSETS=['./','./index.html','./style.css','./app.js','./core.js','./db.js','./enhancements.js','./analysis.js','./features.js','./moments.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('message',event=>{if(event.data==='activate-update')self.skipWaiting();});
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)))});
 self.addEventListener('activate',event=>{event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('blisko-shell-')&&k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()]))});

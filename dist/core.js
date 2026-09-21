@@ -21,6 +21,10 @@ const string=(x,max=20000)=>typeof x==='string'&&x.length<=max;
 const number=(x,min,max)=>typeof x==='number'&&Number.isFinite(x)&&x>=min&&x<=max;
 export function validateBackup(input){
  if(!input||input.app!=='blisko'||input.version!==1||!input.days||typeof input.days!=='object'||Array.isArray(input.days))throw Error('To nie jest kopia aplikacji Blisko w obsługiwanej wersji.');
+ if(input.medSets!=null){
+  if(!Array.isArray(input.medSets)||input.medSets.length>5000)throw Error('Nieprawidłowe zestawy leków.');
+  const ids=new Set();for(const s of input.medSets){if(!s||!safeId(s.id)||ids.has(s.id)||!string(s.name,200)||!s.name.trim()||!Array.isArray(s.items)||!s.items.length||s.items.length>5000)throw Error('Nieprawidłowy zestaw leków.');ids.add(s.id);const refs=new Set();for(const i of s.items){if(!i||!safeId(i.ref)||refs.has(i.ref)||!string(i.name,200)||!string(i.dose,200))throw Error('Nieprawidłowy lek w zestawie.');refs.add(i.ref);}}
+ }
  for(const list of ['symptoms','meds','activities','drinks','habits']){
   if(!Array.isArray(input[list])||input[list].length>5000)throw Error('Nieprawidłowa lista: '+list);
   const ids=new Set();for(const x of input[list]){if(!x||!safeId(x.id)||!string(x.name,200)||!x.name.trim()||ids.has(x.id))throw Error('Nieprawidłowa pozycja: '+list);ids.add(x.id);}
@@ -38,6 +42,7 @@ export function validateBackup(input){
   }
   for(const [k,v] of Object.entries(d.journal)){
    if(k==='photo'){if(!string(v,5000000)||!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(v))throw Error('Nieprawidłowe zdjęcie.');}
+   else if(k==='photos'){if(!Array.isArray(v)||v.length>20)throw Error('Nieprawidłowa kolekcja zdjęć.');const ids=new Set();for(const p of v){if(!p||!safeId(p.id)||ids.has(p.id)||!string(p.caption,1000)||!string(p.src,5000000)||!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(p.src))throw Error('Nieprawidłowe zdjęcie lub podpis.');ids.add(p.id);}}
    else if(k==='rating'){if(!number(v,1,10))throw Error('Nieprawidłowa ocena dnia.');}
    else if(Array.isArray(v)){if(v.length>30||v.some(x=>!string(x,200)))throw Error('Nieprawidłowe wybory.');}
    else if(!string(v))throw Error('Nieprawidłowa refleksja.');

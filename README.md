@@ -1,6 +1,12 @@
 # Blisko — mój dziennik
 
-Wersja 1.1 — [otwórz aplikację](https://ostrowele.github.io/blisko/).
+Wersja 1.2 — [otwórz aplikację](https://ostrowele.github.io/blisko/).
+
+## Nowości w 1.2
+
+- własne zestawy leków z dawkami, edycją i potwierdzeniem przed zapisem;
+- podsumowanie tygodnia od poniedziałku do niedzieli;
+- wiele zdjęć dziennie, podpisy zdjęć i zachowanie zgodności ze starszymi wpisami.
 
 ## Nowości w 1.1
 

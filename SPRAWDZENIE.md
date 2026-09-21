@@ -26,3 +26,11 @@ Sprawdzono 20 września 2026 w oddzielnym, tymczasowym profilu Chrome.
 Testy podstawowej logiki znajdują się w `tests/core.test.mjs`; można je uruchomić przez `npm test` bez instalacji pakietów.
 
 Nie przeprowadzono jeszcze testu na fizycznym telefonie użytkownika ani instalacji z docelowego adresu GitHub Pages. Publikacja wymaga wskazania repozytorium. Test eksperymentalnego WebMCP wykonano z zastępczym rejestrem w przeglądarce; rzeczywista integracja z przeglądarką udostępniającą ten interfejs nie została zweryfikowana. Aplikacja działa bez WebMCP.
+## Aktualizacja 1.2 — 21 września 2026
+
+- zestawy leków: wybór, dawki, edycja, usuwanie, anulowanie bez zapisu;
+- tygodniowe podsumowanie poniedziałek–niedziela z niepełnym bieżącym tygodniem;
+- wiele zdjęć dziennie, podpisy, album, kalendarz, nawigacja i usuwanie pojedynczego zdjęcia;
+- zachowanie starego pola `journal.photo` i walidacja nowych kopii.
+
+Testy jednostkowe: `npm run check && npm test` — zaliczone.
